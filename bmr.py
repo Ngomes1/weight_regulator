@@ -1,3 +1,5 @@
+#importing users.py onto the script
+from users import *
 # creating bmr for both men and women.
 
 bmr = input("Are you a man or women?:")
@@ -65,4 +67,24 @@ else:
     print("You may have entered something other then what was requested of you please try again!")
 
 
-print("Well I hope this was of help to some of you out there good luck on your goals!!")
+x = input("Well I hope this was of help to some of you out there good luck on your goals!!If you want to save or track progress press: y ")
+
+# need to add the singles quotes before your variable values because you need ' surrounding  text based values
+if x == "y":
+    firstname = input("Write your first name: ")
+    lastname = input("Write your last name here: ")
+    calories = input("What is your current recommened caloric intake?: ")
+    weight = input("Please record you current weight: ")
+    goal = input("Please write your current goal.: ")
+    goal_progress = input("Put your current progress towards your goals in lbs. If this is your first entry simply write 0.: ")
+    timestamp = input("Okay now mark the date of this entry: ")
+    ssql = "INSERT INTO users (first,last,calories,weight,goal,goalprogress,timestamp)VALUES('"
+    ssql = ssql + firstname + "', '" + lastname + "', '" + calories +"', '" + weight + "', '" + goal + "', '" + goal_progress + "', '" + timestamp +"')"
+    #print(ssql)
+    conn = sqlite3.connect('bmr.db')
+    c= conn.cursor()
+    c.execute(ssql)
+    conn.commit()
+    c.close()
+    conn.close()
+
